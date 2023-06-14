@@ -1,0 +1,51 @@
+<div>
+  <div *ngIf="!authService.isLoggedIn">
+    <form>
+      <!-- Email input -->
+      <div class="form-outline mb-4">
+        <input [formControl]="userName" type="email" id="form2Example1" class="form-control" />
+        <label class="form-label" for="form2Example1">Email address</label>
+      </div>
+
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <input [formControl]="password" type="password" id="form2Example2" class="form-control" />
+        <label class="form-label" for="form2Example2">Password</label>
+      </div>
+
+      <!-- Submit button -->
+      <button type="button" (click)="loginUser()" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+    </form>
+  </div>
+
+  <div *ngIf="authService.isLoggedIn">
+    <div class="form-group">
+      <a class="btn btn-primary" href="#" [routerLink]="['/new-product']" role="button">New Product</a>
+    </div>
+
+    <h3>Product List</h3>
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products.length">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.name }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.description }}</td>
+          <td><button type="button" class="btn btn-link" (click)="OnEdit(product.id)">Edit</button> <button type="button" (click)="OnDelete(product.id)" class="btn btn-link">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
